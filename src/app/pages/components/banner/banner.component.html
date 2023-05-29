@@ -5,14 +5,25 @@
       <h1>Đăng nhập</h1>
       <div class="gr-inp">
         <label for="">Username</label>
-        <input type="text" name="username" id="" />
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          (ngModelChange)="setUsername(username)"
+        />
       </div>
-      <div class="gr-inp">
+      <!-- <div class="gr-inp">
         <label for="">Password</label>
         <input type="password" name="username" id="" />
-      </div>
+      </div> -->
       <div class="gr-inp">
-        <input type="button" name="" id="" value="Đăng nhập" />
+        <input
+          type="button"
+          name=""
+          id=""
+          value="Chơi ngay"
+          (click)="submitUser()"
+        />
       </div>
     </div>
     <div class="card">

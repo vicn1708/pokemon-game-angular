@@ -29,6 +29,8 @@ export class GameComponent implements AfterViewInit {
   seconds: number = 0;
   intervalId: any;
   scores: number = 0;
+  localStorage: Storage = window.localStorage;
+  user = this.localStorage.getItem('user');
 
   @ViewChildren('cardElement') listCard!: QueryList<ElementRef>;
   @ViewChild('start') startBtn!: ElementRef;
@@ -122,8 +124,9 @@ export class GameComponent implements AfterViewInit {
           );
           this.compare = [];
 
-          if (this.scores < 72) {
+          if (this.scores < 70) {
             this.scores += 2;
+            console.log(this.scores);
           } else {
             this.renderer.setStyle(
               this.startBtn.nativeElement,
