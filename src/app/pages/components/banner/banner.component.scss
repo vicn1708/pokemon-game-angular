@@ -1,0 +1,189 @@
+:root {
+  --card-height: 500px;
+  --card-width: calc(var(--card-height) / 1.5);
+}
+
+.banner {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../../assets/img/banner/bg-banner-2.jpg");
+  background-size: cover;
+  background-position: center;
+
+  .filter-banner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #00000099;
+    z-index: 1;
+  }
+
+  .banner-card {
+    position: absolute;
+    z-index: 1;
+    bottom: 8rem;
+    right: 8rem;
+
+    .form-login {
+      position: absolute;
+      color: white;
+      transition: 1.5s all;
+      z-index: -1;
+      transform: translateX(-30rem);
+      overflow: hidden;
+      visibility: hidden;
+      width: 50rem;
+      height: 104%;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      opacity: 0;
+
+      h1 {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        margin: 1rem 0;
+      }
+
+      .gr-inp {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: 1rem auto;
+
+        label {
+          font-size: 20px;
+        }
+
+        input {
+          padding: 0.5rem 1rem;
+          font-size: 1.25rem;
+          background-color: #333;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          color: white;
+        }
+
+        input[type="button"] {
+          padding: 0.75rem;
+          margin-top: 3rem;
+          cursor: pointer;
+          box-shadow: 0 2px 3px white;
+          transition: 0.25s all;
+
+          &:hover {
+            background-color: #33333355;
+            box-shadow: 0 2px 3px gray;
+          }
+        }
+      }
+    }
+
+    &:hover .form-login {
+      visibility: visible;
+      transform: translateX(-45rem) translateY(5%);
+      opacity: 1;
+    }
+
+    .card {
+      width: 320px;
+      height: calc(320 / 1.5);
+      position: relative;
+      display: flex;
+      justify-content: center;
+
+      .wrapper {
+        transition: all 0.5s;
+        position: absolute;
+        background-color: #fff;
+        border: 4px solid #fff;
+        border-radius: 12px;
+        width: 100%;
+        height: 500px;
+        z-index: -1;
+        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.5);
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+          filter: blur(0);
+          transition: 0.5s ease;
+        }
+
+        &::before,
+        &::after {
+          content: "";
+          opacity: 0;
+          width: 100%;
+          height: 80px;
+          transition: all 0.5s;
+          position: absolute;
+          border-radius: 10px;
+          left: 0;
+        }
+
+        &::before {
+          top: 0;
+          height: 100%;
+          background-image: linear-gradient(
+            to top,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+          );
+        }
+
+        &::after {
+          bottom: 0;
+          opacity: 1;
+          background-image: linear-gradient(
+            to bottom,
+            transparent 46%,
+            rgba(12, 13, 19, 0.5) 68%,
+            rgba(12, 13, 19) 97%
+          );
+        }
+      }
+
+      .character {
+        width: 300px;
+        opacity: 0;
+        transition: all 0.5s;
+      }
+
+      &:hover {
+        .wrapper {
+          transform: perspective(900px) translateY(-5%) rotateX(25deg)
+            translateZ(0);
+          box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        }
+
+        .wrapper::before,
+        .wrapper::after {
+          opacity: 1;
+        }
+
+        .wrapper::after {
+          height: 120px;
+        }
+
+        .wrapper .cover-image {
+          filter: blur(2px);
+        }
+
+        .character {
+          opacity: 1;
+          transform: translate3d(0%, -10.5%, 400px);
+        }
+      }
+    }
+  }
+}

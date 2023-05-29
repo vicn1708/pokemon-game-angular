@@ -1,0 +1,135 @@
+.wrapperGame {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background-image: url("../../../assets/img/banner/bg-banner-1.jpg");
+  position: relative;
+
+  .start {
+    position: absolute;
+    background-color: #00000099;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+
+    .box-start {
+      width: 30rem;
+      height: 40vh;
+      background-color: white;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      b {
+        font-size: 6rem;
+        color: #e7c059;
+      }
+
+      button {
+        padding: 1rem 4rem;
+        font-size: 2rem;
+        border-radius: inherit;
+        border: 1px solid transparent;
+        box-shadow: 0 5px 10px gray;
+        cursor: pointer;
+        background-color: #95ec9e;
+        color: white;
+      }
+    }
+  }
+
+  .fillGame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000099;
+  }
+
+  .back {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    cursor: pointer;
+    z-index: 10;
+
+    i {
+      color: white;
+      font-size: 2rem;
+    }
+  }
+
+  .math {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    width: 70%;
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+
+    .time {
+      color: white;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .point {
+      color: #e7c059;
+      font-size: 3rem;
+    }
+  }
+
+  .listCard {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    width: 70%;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-top: 6rem;
+
+    .card {
+      background-color: #ffffff99;
+      border-radius: inherit;
+      cursor: pointer;
+      transition: 0.25s all;
+      position: relative;
+      user-select: none;
+
+      &:hover {
+        background-color: #33333399;
+      }
+
+      img:first-child {
+        transition: 0.25s all;
+        opacity: 0;
+      }
+
+      .back-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 80%;
+        background-color: white;
+        border-radius: 50%;
+        transition: 0.25s all;
+        opacity: 1;
+      }
+    }
+  }
+}
