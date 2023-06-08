@@ -30,6 +30,28 @@
         color: #e7c059;
       }
 
+      .level {
+        width: 100%;
+        text-align: center;
+
+        label {
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+        select {
+          background-color: gray;
+          color: white;
+          border: none;
+          font-size: 18px;
+          border-radius: 8px;
+          padding: 0.5rem;
+          margin-left: 1rem;
+          cursor: pointer;
+          outline: none;
+        }
+      }
+
       button {
         padding: 1rem 4rem;
         font-size: 2rem;
@@ -96,15 +118,18 @@
 
   .listCard {
     position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1;
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    width: 70%;
     gap: 0.5rem;
+    width: max-content;
     border-radius: 0.5rem;
     overflow: hidden;
-    margin-top: 6rem;
+    cursor: url("../../../assets/img/cursor.png"), auto !important;
 
     .card {
       background-color: #ffffff99;

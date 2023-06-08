@@ -1,14 +1,13 @@
 import {
   Component,
   Renderer2,
-  OnInit,
   ElementRef,
   ViewChildren,
   QueryList,
   AfterViewInit,
   ViewChild,
 } from '@angular/core';
-import getPokemonData, { Pokemon } from './listPokemon';
+import getPokemonData, { Pokemon, level } from './listPokemon';
 
 interface ICompare {
   id: number;
@@ -20,8 +19,9 @@ interface ICompare {
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent implements AfterViewInit {
-  pokemons: Promise<Pokemon[]> = getPokemonData();
+export class GameComponent {
+  round: number = 1;
+  pokemons: Promise<Pokemon[]> = getPokemonData(this.round);
   listPokemon: Pokemon[] = [];
   compare: ICompare[] = [];
   point: number = 0;
@@ -31,8 +31,10 @@ export class GameComponent implements AfterViewInit {
   scores: number = 0;
   localStorage: Storage = window.localStorage;
   user = this.localStorage.getItem('user');
+  roundStart = level.find((r) => r.round === this.round);
 
   @ViewChildren('cardElement') listCard!: QueryList<ElementRef>;
+  @ViewChild('listCard') listCardEl!: ElementRef;
   @ViewChild('start') startBtn!: ElementRef;
   @ViewChild('soundClick') soundClick!: ElementRef;
   @ViewChild('soundEat') soundEat!: ElementRef;
@@ -64,7 +66,17 @@ export class GameComponent implements AfterViewInit {
     this.minutes = 3;
     this.seconds = 0;
     this.renderer.setStyle(this.startBtn.nativeElement, 'display', 'none');
-    this.pokemons = getPokemonData();
+    this.renderer.setStyle(
+      this.listCardEl.nativeElement,
+      'grid-template-columns',
+      `repeat(${this.roundStart?.x}, 1fr)`
+    );
+    this.renderer.setStyle(
+      this.listCardEl.nativeElement,
+      'grid-template-rows',
+      `repeat(${this.roundStart?.y}, 1fr)`
+    );
+    this.pokemons = getPokemonData(this.roundStart?.radio!);
     this.listPokemon = [];
     await this.getPokemonData();
     this.startCountdown();
@@ -89,7 +101,9 @@ export class GameComponent implements AfterViewInit {
   onClickCard(element: HTMLElement) {
     if (this.compare.length < 2) {
       this.soundClick.nativeElement.play();
+
       const card = this.flip(element);
+
       this.compare.push(card);
 
       if (
@@ -124,9 +138,8 @@ export class GameComponent implements AfterViewInit {
           );
           this.compare = [];
 
-          if (this.scores < 70) {
+          if (this.scores < this.roundStart?.radio! - 2) {
             this.scores += 2;
-            console.log(this.scores);
           } else {
             this.renderer.setStyle(
               this.startBtn.nativeElement,
@@ -140,7 +153,7 @@ export class GameComponent implements AfterViewInit {
               'font-size',
               '4rem'
             );
-            this.startBtn.nativeElement.children[0].children[1].innerText =
+            this.startBtn.nativeElement.children[0].children[2].innerText =
               'Chơi lại';
           }
         }, 1500);
@@ -152,6 +165,13 @@ export class GameComponent implements AfterViewInit {
         }, 1000);
       }
     }
+  }
+
+  chooseLevel(round: any) {
+    this.round = round;
+    this.roundStart = level.find((r) => r.round == round);
+    console.log(this.round);
+    console.log(this.roundStart);
   }
 
   startCountdown() {
@@ -172,7 +192,7 @@ export class GameComponent implements AfterViewInit {
           );
           this.startBtn.nativeElement.children[0].children[0].innerText =
             'GAME OVER';
-          this.startBtn.nativeElement.children[0].children[1].innerText =
+          this.startBtn.nativeElement.children[0].children[2].innerText =
             'Chơi lại';
           this.renderer.setStyle(
             this.startBtn.nativeElement.children[0].children[0],

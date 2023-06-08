@@ -12,6 +12,19 @@
   <div class="start" #start>
     <div class="box-start">
       <b>{{ minutes }}:00</b>
+      <div class="level">
+        <label for="">Cấp độ</label>
+        <select
+          name=""
+          id=""
+          [(ngModel)]="round"
+          (ngModelChange)="chooseLevel(round)"
+        >
+          <option *ngFor="let item of [1, 2, 3, 4, 5]" value="{{ item }}">
+            {{ item }}
+          </option>
+        </select>
+      </div>
       <button (click)="startGame()">Bắt đầu trò chơi</button>
     </div>
   </div>
@@ -28,7 +41,7 @@
     <div class="point">{{ point }}</div>
   </div>
 
-  <div class="listCard">
+  <div #listCard class="listCard">
     <div
       #cardElement
       *ngFor="let p of listPokemon"
